@@ -3,17 +3,20 @@ from src.api_consumer import ApiConsumer
 
 class TestApis(unittest.TestCase):
 
-    api_consumer = None
+    def ntest_get_forgery_token(self):
+        api_consumer = ApiConsumer()
+        api_consumer.read_config()
+        api_consumer.login()
+        json = api_consumer.get_forgery_token()
+        api_consumer.logout()
+        assert len(json["token"]) > 1
 
-    def setUp(self) -> None:
-        self.api_consumer = ApiConsumer()
-        self.api_consumer.read_config()
-        self.api_consumer.login()
-        return super().setUp()
-
-    def tearDown(self) -> None:
-        self.api_consumer.logout()
-        return super().tearDown()
-
-    def test_read_config(self):
-        assert self.api_consumer.config["key"] == "value"
+    def test_get_doctors_and_facilities(self):
+        api_consumer = ApiConsumer()
+        api_consumer.read_config()
+        api_consumer.login()
+        api_consumer.get_forgery_token()
+        json = api_consumer.get_doctors_and_facilities()
+        api_consumer.logout()
+        #print(json)
+        assert len(json["doctors"]) > 1
