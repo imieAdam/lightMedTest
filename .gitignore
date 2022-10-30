@@ -1,3 +1,6 @@
 __pycache__/
 .pytest_cache/
-resources/config.yaml
+test/resources/config.yaml
+src/resources/config.yaml
+.vscode/
+temp_schema/
